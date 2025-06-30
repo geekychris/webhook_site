@@ -1,0 +1,5 @@
+Create me a spring boot application that functions similar to webhooks.site.  The basic mechanism should allow the creation of a custom url that can have webhook events sent to it.  The url should support either a random name or the user should be able to try to create a name as long as its not already defined.
+When a webhook message is sent to the service its header and payload should be stored.  Use a database to store the webhook general info and each of the header payloads.
+Use a Vaadin Flow UI to provide a way for the user to create a new webhook endpoint and to view all the messages.  
+
+
