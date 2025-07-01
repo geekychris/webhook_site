@@ -126,6 +126,9 @@ curl -X DELETE "http://localhost:8082/api/webhook/test-webhook"
 
 An example:
 ![img.png](doc_images/img.png)
+
+and of the request body:
+![img.png](doc_images/request_body.png)
 ## Features
 
 - Create webhook endpoints with custom or word-pair based paths
