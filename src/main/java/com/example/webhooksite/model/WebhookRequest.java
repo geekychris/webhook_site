@@ -2,12 +2,16 @@ package com.example.webhooksite.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
 @Data
+@Getter
+@Setter
 public class WebhookRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

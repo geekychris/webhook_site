@@ -22,7 +22,9 @@ The application is built using:
    - `WebhookService`: Manages webhook creation and request handling
    - `WebhookRepository`: JPA repository for data persistence
    - `WebhookController`: REST controller for handling incoming webhook requests
-   - `MainView`: Vaadin UI component for the web interface
+   - `MainView`: Lists all webhook endpoints
+   - `CreateWebhookView`: UI for creating new webhook endpoints
+   - `WebhookDetailsView`: Split-panel view for inspecting webhook requests
 
 ### Database Schema
 
@@ -58,10 +60,10 @@ The application will be available at:
 
 ### Creating a Webhook
 
-1. Open http://localhost:8082 in your browser
-2. Use the "Create New Webhook" form at the top of the page
-3. Enter a custom path (optional) or leave blank for a random UUID
-4. Click "Create Webhook"
+1. Open http://localhost:8082/create in your browser
+2. Enter a custom path or click "Generate Random Path" for a word-pair based path (e.g., "cat-magnet")
+3. Click "Create Webhook"
+4. The webhook URL will be displayed and can be copied to clipboard
 
 ### Sending Webhook Requests
 
@@ -105,21 +107,28 @@ curl -X DELETE "http://localhost:8082/api/webhook/test-webhook"
 ### Viewing Webhook Requests
 
 1. All webhook endpoints are listed on the main page
-2. Click on a webhook to view its received requests
-3. Click on a request to view detailed information:
-   - HTTP Method
-   - Headers
-   - Request Body
-   - Timestamp
+2. Click on a webhook to navigate to its details page (http://localhost:8082/webhook/your-path)
+3. The details page shows:
+   - Left panel: List of all requests with method and timestamp
+   - Right panel: Detailed view of the selected request
+     - Request method and timestamp
+     - Headers tab: All request headers in a grid view
+     - Body tab: Pretty-printed JSON if valid, raw text otherwise
+4. Real-time updates:
+   - New requests appear automatically in the left panel
+   - Notification shown when new requests arrive
+   - Latest request is automatically selected
 
 ## Features
 
-- Create webhook endpoints with custom or random paths
+- Create webhook endpoints with custom or word-pair based paths
 - Support for all HTTP methods
-- Capture and store request headers and body
-- View webhook request history
-- Real-time UI updates when new requests are received
+- Modern split-panel interface for request inspection
+- Pretty-printing of JSON payloads
+- Real-time UI updates using Vaadin Push
+- Copy webhook URL to clipboard
 - Persistent storage using H2 database
+- Separate pages for endpoint creation and request inspection
 
 ## Technical Notes
 

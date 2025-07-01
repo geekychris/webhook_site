@@ -19,7 +19,7 @@ public class WebhookController {
         this.webhookService = webhookService;
     }
 
-    @RequestMapping(value = "/{path}/**", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, 
+    @RequestMapping(value = "/{path}", method = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, 
         RequestMethod.DELETE, RequestMethod.PATCH, RequestMethod.HEAD, RequestMethod.OPTIONS})
     public ResponseEntity<String> handleWebhook(@PathVariable String path, HttpServletRequest request) throws IOException {
         // Extract headers
