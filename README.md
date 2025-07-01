@@ -56,6 +56,8 @@ The application will be available at:
 - Web UI: http://localhost:8082
 - H2 Console: http://localhost:8082/h2-console (if needed)
 
+The default page lists the current webhooks:
+![img_2.png](doc_images/img_2.png)
 ## Usage
 
 ### Creating a Webhook
@@ -64,6 +66,9 @@ The application will be available at:
 2. Enter a custom path or click "Generate Random Path" for a word-pair based path (e.g., "cat-magnet")
 3. Click "Create Webhook"
 4. The webhook URL will be displayed and can be copied to clipboard
+
+An example:
+![img_1.png](doc_images/img_1.png)
 
 ### Sending Webhook Requests
 
@@ -119,6 +124,8 @@ curl -X DELETE "http://localhost:8082/api/webhook/test-webhook"
    - Notification shown when new requests arrive
    - Latest request is automatically selected
 
+An example:
+![img.png](doc_images/img.png)
 ## Features
 
 - Create webhook endpoints with custom or word-pair based paths
