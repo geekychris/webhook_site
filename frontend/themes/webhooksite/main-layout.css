@@ -1,0 +1,12 @@
+vaadin-app-layout::part(drawer) {
+  background-color: var(--lumo-base-color);
+}
+
+vaadin-app-layout::part(navbar) {
+  background-color: var(--lumo-base-color);
+  border-bottom: 1px solid var(--lumo-contrast-10pct);
+}
+
+vaadin-drawer-toggle {
+  color: var(--lumo-secondary-text-color);
+}

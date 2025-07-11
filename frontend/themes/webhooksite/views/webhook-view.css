@@ -1,0 +1,30 @@
+.webhook-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.webhook-view vaadin-split-layout {
+    width: 100%;
+    height: 100%;
+}
+
+.webhook-view vaadin-grid {
+    height: 100%;
+}
+
+.webhook-view .editor-layout {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.webhook-view .editor {
+    flex-grow: 1;
+    padding: var(--lumo-space-l);
+}
+
+.webhook-view .editor vaadin-button {
+    margin-right: var(--lumo-space-m);
+    margin-top: var(--lumo-space-m);
+}

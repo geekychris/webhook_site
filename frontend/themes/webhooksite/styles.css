@@ -1,0 +1,13 @@
+@import url('./main-layout.css');
+@import url('./views/webhook-view.css');
+
+html {
+    --lumo-primary-color: #1976d2;
+    --lumo-primary-text-color: #1976d2;
+    --lumo-border-radius: 4px;
+}
+
+[theme~="dark"] {
+    --lumo-primary-color: #90caf9;
+    --lumo-primary-text-color: #90caf9;
+}
