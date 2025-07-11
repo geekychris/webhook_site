@@ -1,3 +1,134 @@
+# WebhookSite
+
+WebhookSite is a self-hosted webhook testing service similar to webhooks.site. It allows you to create webhook endpoints and inspect incoming HTTP requests in real-time through a modern web interface.
+
+## Features
+
+- Create custom webhook endpoints or use auto-generated ones
+- Real-time request inspection with WebSocket updates
+- View request details including headers, body, and source information
+- Pretty-print JSON payloads
+- Persistent storage of webhook requests
+- Modern, responsive UI built with Vaadin
+
+## Tech Stack
+
+- Backend: Spring Boot
+- Frontend: Vaadin Flow
+- Database: PostgreSQL
+- Containerization: Docker
+- Orchestration: Kubernetes
+
+## Prerequisites
+
+- Java 21 or later
+- Docker
+- Kubernetes cluster (local like minikube/kind/k3d or remote)
+- kubectl configured to access your cluster
+
+## Building and Running Locally
+
+### Using Docker Compose
+
+1. Build and start the application:
+   ```bash
+   ./mvnw clean package -Pproduction
+   docker compose up -d
+   ```
+
+2. Access the application at http://localhost:8083
+
+### Using Kubernetes
+
+1. Deploy the application:
+   ```bash
+   ./deploy.sh
+   ```
+
+2. Access the application at http://localhost:8083
+
+To clean up Kubernetes resources:
+```bash
+./cleanup.sh
+```
+
+## Application Structure
+
+- `src/main/java/com/example/webhooksite/`
+  - `controller/` - REST endpoints for webhook handling
+  - `model/` - JPA entities
+  - `repository/` - Spring Data JPA repositories
+  - `service/` - Business logic
+  - `ui/` - Vaadin views and components
+
+## Usage
+
+1. Create a Webhook:
+   - Visit the home page
+   - Click "Create Webhook"
+   - Optionally specify a custom path or let the system generate one
+   - Copy the webhook URL
+
+2. Send Requests:
+   - Use the webhook URL with any HTTP method (GET, POST, PUT, etc.)
+   - Send any headers and body content
+
+3. View Requests:
+   - Click on a webhook in the list
+   - See requests in real-time in the left panel
+   - View detailed request information in the right panel
+   - Headers and body are displayed in separate tabs
+   - JSON bodies are automatically pretty-printed
+
+## Development
+
+### Development Mode
+
+For local development:
+```bash
+./mvnw spring-boot:run
+```
+
+The application will start in development mode with H2 database.
+
+### Production Build
+
+For production deployment:
+```bash
+./mvnw clean package -Pproduction
+```
+
+This builds the application with:
+- Optimized frontend resources
+- PostgreSQL configuration
+- Production-ready settings
+
+## Container Images
+
+The application uses multi-stage Docker builds:
+1. Build stage with JDK and Node.js for compilation and frontend build
+2. Runtime stage with JRE only for minimal image size
+
+## Kubernetes Deployment
+
+The Kubernetes deployment includes:
+- ConfigMap for application properties
+- Secret for database credentials
+- StatefulSet for PostgreSQL database
+- Deployment for the application
+- LoadBalancer Service for external access
+
+### Configuration
+
+- Database configuration in `k8s/configmap.yaml`
+- Credentials in `k8s/secret.yaml`
+- Database settings in `k8s/postgres.yaml`
+- Application deployment in `k8s/app.yaml`
+
+## License
+
+This project is open source and available under the MIT License.
+
 # Webhook Site
 
 A Spring Boot application similar to webhooks.site that allows you to create custom webhook endpoints and inspect incoming webhook requests. The application provides a Vaadin-based UI for creating and managing webhook endpoints, and viewing the received webhook payloads.

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webhooksite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhooksite
+  template:
+    metadata:
+      labels:
+        app: webhooksite
+    spec:
+      containers:
+      - name: webhooksite
+        image: webhooksite-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8082
+        envFrom:
+        - secretRef:
+            name: webhooksite-secret
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: webhooksite-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhooksite
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8083
+    targetPort: 8082
+  selector:
+    app: webhooksite

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: webhooksite-db
+spec:
+  serviceName: webhooksite-db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhooksite-db
+  template:
+    metadata:
+      labels:
+        app: webhooksite-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16-alpine
+        ports:
+        - containerPort: 5432
+        envFrom:
+        - secretRef:
+            name: webhooksite-secret
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhooksite-db
+spec:
+  ports:
+  - port: 5432
+  selector:
+    app: webhooksite-db
