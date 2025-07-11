@@ -45,7 +45,7 @@ public class WebhookService {
     }
 
     @Transactional
-    public WebhookRequest recordWebhookRequest(String path, String method, String body, Map<String, String> headers) {
+    public WebhookRequest recordWebhookRequest(String path, String method, String body, Map<String, String> headers, String remoteHost, String serverHost) {
         Webhook webhook = webhookRepository.findByPath(path)
             .orElseThrow(() -> new IllegalArgumentException("Webhook not found"));
 
@@ -54,6 +54,8 @@ public class WebhookService {
         request.setMethod(method);
         request.setBody(body);
         request.setHeaders(headers);
+        request.setRemoteHost(remoteHost);
+        request.setServerHost(serverHost);
 
         webhook.getRequests().add(request);
         webhookRepository.save(webhook);

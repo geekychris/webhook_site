@@ -66,6 +66,12 @@ public class WebhookDetailsView extends VerticalLayout implements HasUrlParamete
         requestGrid.addColumn(req -> req.getMethod())
                 .setHeader("Method")
                 .setWidth("100px");
+        requestGrid.addColumn(req -> req.getRemoteHost())
+                .setHeader("From")
+                .setWidth("150px");
+        requestGrid.addColumn(req -> req.getServerHost())
+                .setHeader("To")
+                .setWidth("150px");
         requestGrid.addColumn(req -> req.getReceivedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .setHeader("Time")
                 .setWidth("200px");
@@ -96,7 +102,8 @@ public class WebhookDetailsView extends VerticalLayout implements HasUrlParamete
         requestDetails.removeAll();
 
         // Method and time
-        H3 methodTime = new H3(request.getMethod() + " - " + 
+        H3 methodTime = new H3(request.getMethod() + " from " + request.getRemoteHost() + 
+            " to " + request.getServerHost() + " - " + 
             request.getReceivedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         requestDetails.add(methodTime);
 

@@ -30,7 +30,10 @@ public class WebhookController {
         // Extract body
         String body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 
-        webhookService.recordWebhookRequest(path, request.getMethod(), body, headers);
+        String remoteHost = request.getRemoteHost();
+        String serverHost = request.getServerName();
+
+        webhookService.recordWebhookRequest(path, request.getMethod(), body, headers, remoteHost, serverHost);
         
         return ResponseEntity.ok("Webhook received");
     }

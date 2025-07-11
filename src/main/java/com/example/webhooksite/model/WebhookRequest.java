@@ -25,7 +25,10 @@ public class WebhookRequest {
     @Column(length = 10000)
     private String body;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    private String remoteHost;
+    private String serverHost;
+
+    @ElementCollection
     @CollectionTable(name = "webhook_request_headers")
     @MapKeyColumn(name = "header_name")
     @Column(name = "header_value")
