@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="Webhook Site logo" width="180">
+</p>
+
 # WebhookSite
 
 WebhookSite is a self-hosted webhook testing service similar to webhooks.site. It allows you to create webhook endpoints and inspect incoming HTTP requests in real-time through a modern web interface.
